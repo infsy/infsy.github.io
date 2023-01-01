@@ -1,1 +1,1 @@
-window.TEXT_SEARCH_DATA={'posts':[{'title':"Post with Header Image",'url':"/2018/06/01/header-image.html"},{'title':"Welcome",'url':"/2018/07/01/welcome.html"}]};
+window.TEXT_SEARCH_DATA={'posts':[{'title':"En finir avec les buckets S3 publics (at scale)",'url':"/technical/2023/01/01/s3-block-public-access.html"},{'title':"Welcome",'url':"/2023/01/01/welcome.html"}]};
