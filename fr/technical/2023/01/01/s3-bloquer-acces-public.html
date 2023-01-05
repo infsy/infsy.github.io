@@ -1,11 +1,10 @@
 <!DOCTYPE html><html lang="en">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Home - Protect your Cloud</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>En finir avec les buckets S3 publics (at scale) - Protect your Cloud</title>
 
-<meta name="description" content="Welcome in my blog. This website is focused on Cloud security resources and news.
-">
-<link rel="canonical" href="https://cedricthibault.cloud/"><link rel="alternate" type="application/rss+xml" title="Protect your Cloud" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="shortcut icon" href="/assets/favicon.ico">
+<meta name="description" content="TL;DRMalgré de nombreuses mesures de protection ajoutées par AWS pour sécuriser les buckets S3, de nombreux incidents de brèches de données continuent à se p...">
+<link rel="canonical" href="https://cedricthibault.cloud/fr/technical/2023/01/01/s3-bloquer-acces-public.html"><link rel="alternate" type="application/rss+xml" title="Protect your Cloud" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="shortcut icon" href="/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/browserconfig.xml">
 
@@ -259,7 +258,7 @@
 </head>
   <body>
     <div class="root" data-is-touch="false">
-      <div class="layout--page js-page-root"><div class="page__main js-page-main page__viewport cell cell--auto">
+      <div class="layout--page js-page-root"><div class="page__main js-page-main page__viewport has-aside cell cell--auto">
 
       <div class="page__main-inner"><div class="page__header d-print-none"><header class="header"><div class="main">
       <div class="header__title">
@@ -291,17 +290,19 @@ fill="#000000" stroke="none">
         <ul><li class="navigation__item"><a href="/archive.html">Archive</a></li><li class="navigation__item"><a href="/about.html">About</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
       </nav></div>
   </header>
-</div><div class="page__content"><div class ="main"><div class="grid grid--reverse">
+</div><div class="page__content"><img class="article__header--cover" src="/assets/images/s3-art-front.jpg" /><div class ="main"><div class="grid grid--reverse">
 
-              <div class="col-aside d-print-none js-col-aside"></div>
+              <div class="col-aside d-print-none js-col-aside"><aside class="page__aside js-page-aside"><div class="toc-aside js-toc-root"></div>
+</aside></div>
 
               <div class="col-main cell cell--auto"><!-- start custom main top snippet -->
 
 <!-- end custom main top snippet -->
-<article itemscope itemtype="http://schema.org/WebPage"><header style="display:none;"><h1>Home</h1></header><meta itemprop="headline" content="Home"><meta itemprop="author" content="Cedric Thibault"/><div class="js-article-content"><div class="layout--articles"><div class="article-list items items--divided"><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/fr/technical/2023/01/01/s3-bloquer-acces-public.html"><h2 itemprop="headline" class="item__header">En finir avec les buckets S3 publics (at scale)</h2></a></header>
-          <div class="item__description"><div class="article__content" itemprop="description articleBody">TL;DR
-Malgré de nombreuses mesures de protection ajoutées par AWS pour sécuriser les buckets S3, de nombreux incidents de brèches de données continuent à se produire par erreur de configuration du client. Cet article vise à vous détailler la mise en place de mécanismes de prévention qui permettent de se protéger contre une exposition accidentell...</div><p><a href="/fr/technical/2023/01/01/s3-bloquer-acces-public.html">Read more</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+<article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>En finir avec les buckets S3 publics (at scale)</h1></header><span class="split-space">&nbsp;</span>
+          <a class="edit-on-github"
+            title="Edit on Github"
+            href="https://github.com/infsy/infsy.github.io/tree/master/fr/_posts/2023-01-01-s3-bloquer-acces-public.md">
+            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="En finir avec les buckets S3 publics (at scale)"><div class="article__info clearfix"><ul class="left-col menu"><li>
               <a class="button button--secondary button--pill button--sm"
                 href="/archive.html?tag=s3">s3</a>
             </li><li>
@@ -312,41 +313,101 @@ Malgré de nombreuses mesures de protection ajoutées par AWS pour sécuriser le
                 href="/archive.html?tag=public">public</a>
             </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Jan 01, 2023</span>
             </li></ul></div><meta itemprop="author" content="Cedric Thibault"/><meta itemprop="datePublished" content="2023-01-01T00:00:00-05:00">
-    <meta itemprop="keywords" content="s3,aws,public"></div>
-      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/fr/2023/01/01/bienvenue.html"><h2 itemprop="headline" class="item__header">Bienvenue</h2></a></header>
-          <div class="item__description"><div class="article__content" itemprop="description articleBody">Bienvenue sur mon blog, résolution de l’année 2023 ;-) Si vous n’êtes pas intéressés par l’actualité autour du Cloud, alors clairement vous vous êtes trompé d’endroit..</div><p><a href="/fr/2023/01/01/bienvenue.html">Read more</a></p></div><div class="article__info clearfix"><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Jan 01, 2023</span>
-            </li></ul></div><meta itemprop="author" content="Cedric Thibault"/><meta itemprop="datePublished" content="2023-01-01T00:00:00-05:00"></div>
-      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/2023/01/01/welcome.html"><h2 itemprop="headline" class="item__header">Welcome</h2></a></header>
-          <div class="item__description"><div class="article__content" itemprop="description articleBody">Welcome to my blog, resolution of the year 2023 ;-) If you are not interested in the news around the Cloud, then clearly you are in the wrong place..</div><p><a href="/2023/01/01/welcome.html">Read more</a></p></div><div class="article__info clearfix"><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Jan 01, 2023</span>
-            </li></ul></div><meta itemprop="author" content="Cedric Thibault"/><meta itemprop="datePublished" content="2023-01-01T00:00:00-05:00"></div>
-      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/technical/2023/01/01/s3-block-public-access.html"><h2 itemprop="headline" class="item__header">Putting an end to public S3 buckets (at scale)</h2></a></header>
-          <div class="item__description"><div class="article__content" itemprop="description articleBody">TL;DR
-Despite numerous safeguards added by AWS to secure S3 buckets, many data breach incidents continue to occur due to client configuration errors. This article aims to detail the implementation of prevention mechanisms that protect against accidental bucket exposure in an AWS organization.
-Introduction
-Actually I should title this article, no...</div><p><a href="/technical/2023/01/01/s3-block-public-access.html">Read more</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=s3">s3</a>
-            </li><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=aws">aws</a>
-            </li><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=public">public</a>
-            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Jan 01, 2023</span>
-            </li></ul></div><meta itemprop="author" content="Cedric Thibault"/><meta itemprop="datePublished" content="2023-01-01T00:00:00-05:00">
-    <meta itemprop="keywords" content="s3,aws,public"></div>
-      </article></div>
-</div><div class="layout--home"></div>
-<script>/*(function () {
+    <meta itemprop="keywords" content="s3,aws,public"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
 
-})();*/
+<!-- end custom article top snippet -->
+<div class="article__content" itemprop="articleBody">
+<div class="lang">
+  <ul>
+    
+      <li><a class="" href="/fr/technical/2023/01/01/s3-bloquer-acces-public.html"></a></li>
+    
+      <li><a class="" href="/technical/2023/01/01/s3-block-public-access.html"></a></li>
+    
+  </ul>
+</div>
+<h1 id="tldr">TL;DR</h1>
+<p>Malgré de nombreuses mesures de protection ajoutées par AWS pour sécuriser les buckets S3, de nombreux incidents de brèches de données continuent à se produire par erreur de configuration du client. Cet article vise à vous détailler la mise en place de mécanismes de prévention qui permettent de se protéger contre une exposition accidentelle de bucket dans une organisation AWS.</p>
+<h1 id="introduction">Introduction</h1>
+<p>En réalité je devrais plutôt titrer cet article, en finir avec les buckets S3 publics non désirés! Dans une organisation AWS d’importance, il est probable que l’exposition de buckets soit une nécessité: site web statique, mise à disposition d’actifs Web publics, zone de dépôt proposée aux clients, etc…
+Bien que ces cas d’usages soient souvent des exceptions, c’est justement ce qui est compliqué à gérer, l’exception.</p>
+
+<h1 id="la-solution-simple">La solution simple</h1>
+<p>Pour se protéger contre l’exposition par erreur d’un bucket S3, rien de plus simple, il suffit de mettre en place le paramètre <a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3control/put-public-access-block.html">S3 Block Public Access</a> au niveau du compte, et tous les buckets qui seront présents dans ce compte AWS seront de facto privés (c’est à dire exposés seulement à des utilisateurs ou rôles appartenant à l’organisation, au compte ou explicitement cités). Bien sûr, pour la mise en place de ce paramètre, l’idéal est de l’automatiser à la création de chaque nouveau compte AWS avec par exemple l’utilisation de la solution AWS <a href="https://medium.com/r/?url=https%3A%2F%2Faws.amazon.com%2Fsolutions%2Fimplementations%2Fcustomizations-for-aws-control-tower%2F">Customizations</a>.</p>
+
+<p><em>À noter que ce paramètre de Block Public Access peut être défini au niveau du compte mais également au niveau des buckets.</em></p>
+<h1 id="protéger-la-solution-simple">Protéger la solution simple</h1>
+<p>Le problème du Block Public Access, c’est que n’importe quel administrateur ou utilisateur avec la permission appropriée peut désactiver ce paramètre pour publier en urgence un bucket public (la fameuse urgence qui ne dure pas et est sans conséquence…). Pour se protéger contre une désactivation du paramètre, la meilleure façon d’agir et de définir une Service Control Policy (SCP) au niveau de AWS Organization qui va permettre d’empêcher tout changement de ce paramètre.</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/6275fed69dca96f168cb193a36d0cd86.js"> </script>
+
+<p>Cette SCP sera appliquée sur l’ensemble des OU de l’organisation à l’exception d’une OU dédiée pour les comptes exposants des ressources publiques.</p>
+
+<p><img src="/assets/images/bloc-public-access-organization.jpg" alt="&quot;alt text&quot;" title="Exemple d'une organisation limitant les expositions publiques" /></p>
+
+<p>Les comptes n’héritant pas de cette SCP pourront alors exposer des buckets publics tandis que les buckets privés dans ces même comptes pourront eux bénéficier du paramètre Block Public Access au niveau du bucket en soi.</p>
+
+<h1 id="mettre-en-place-un-shérif-en-ville">Mettre en place un Shérif en ville</h1>
+<p>En théorie, avec cette SCP vous venez réduire considérablement le risque car seul les comptes devant exposer des buckets publics seront autorisés à le faire.
+Ceci dit, le risque que dans ces quelques comptes une erreur expose un bucket contenant des données confidentielles existe encore. Pour cela, il est intéressant de venir contrôler que les buckets exposés publics sont bien ceux qui ont été identifiés comme contenant des données qui sont elles même publiques.
+Pour cela, les tags vont être utiles. En effet, dans un modèle DevOps agile, la sécurité vient en partie être assumée par les développeurs qui créent leurs infrastructures. Par conséquent, si un développeur veut exposer un bucket public, on veut auparavant s’assurer qu’il est conscient de ce qu’il fait en lui demandant de définir un tag “public” sur le bucket. En lui demandant cette étape supplémentaire, on vient supprimer tout risque de mauvaise compréhension de la part du développeur exposant son bucket sans se rendre compte du risque.</p>
+
+<p><img src="/assets/images/bloc-public-access-automation.jpg" alt="&quot;alt text&quot;" title="Architecture de notre contrôle de remédiation" /></p>
+
+<p>Associé au tag, c’est une Lambda qui va vérifier suite à chaque changement sur un bucket S3 (via EventBridge) le statut d’exposition du bucket et le comparer au tag associé (ou non) à ce bucket. Dans notre exemple, nous utilisons un tag dont la clé est “protectyourcloud:classification-securite-donnees” et la valeur doit être à “public” pour permettre au bucket de rester public.</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/d60ceeb74f25552e6cefa3648e08bcc8.js"> </script>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>La mise en place d’un contrôle préventif et d’un contrôle de réaction est la meilleure façon de compléter la détection effectuée généralement par le biais de votre CSPM ou de vos règles Config.
+Le plus important est de toujours inclure dans vos stratégies de protection les cas d’exception via des contrôles spécifiques, souvent liés aux tags. De plus, la mise en place stricte d’un tag associé aux buckets publics va permettre de suivre facilement l’inventaire des buckets exposés.</p>
+
+<!--more-->
+</div><section class="article__sharing d-print-none"><!-- Addthis BEGIN --><script type="text/javascript"
+    src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-63b1bec15081fbb5"></script>
+  <div class="addthis_inline_share_toolbox addthis_default_style"></div><!-- Addthis END -->
+</section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2023-01-01T00:00:00-05:00"><!-- start custom article footer snippet -->
+
+<!-- end custom article footer snippet -->
+<div class="article__subscribe"><div class="subscribe"><i class="fas fa-rss"></i> <a type="application/rss+xml" href="/feed.xml">Subscribe</a></div>
+</div><div class="article__license"><div class="license">
+    <p>This work is licensed under a <a itemprop="license" rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> license.
+      <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+        <img alt="Attribution-NonCommercial 4.0 International" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" />
+      </a>
+    </p>
+  </div></div></footer>
+<div class="article__section-navigator clearfix"><div class="previous"><span>PREVIOUS</span><a href="/fr/2023/01/01/bienvenue.html">Bienvenue</a></div></div></div>
+
+</div>
+
+<script>(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    $(function() {
+      var $this ,$scroll;
+      var $articleContent = $('.js-article-content');
+      var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+      var scroll = hasSidebar ? '.js-page-main' : 'html, body';
+      $scroll = $(scroll);
+
+      $articleContent.find('.highlight').each(function() {
+        $this = $(this);
+        $this.attr('data-lang', $this.find('code').attr('data-lang'));
+      });
+      $articleContent.find('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]').each(function() {
+        $this = $(this);
+        $this.append($('<a class="anchor d-print-none" aria-hidden="true"></a>').html('<i class="fas fa-anchor"></i>'));
+      });
+      $articleContent.on('click', '.anchor', function() {
+        $scroll.scrollToAnchor('#' + $(this).parent().attr('id'), 400);
+      });
+    });
+  });
+})();
 </script>
-
-
-
 </div><section class="page__comments d-print-none"></section></article><!-- start custom main bottom snippet -->
 
 <!-- end custom main bottom snippet -->
@@ -829,6 +890,68 @@ window.Lazyload.js(SOURCES.jquery, function() {
 /*(function () {
 
 })();*/
+</script><script>
+  /* toc must before affix, since affix need to konw toc' height. */(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  var TOC_SELECTOR = window.TEXT_VARIABLES.site.toc.selectors;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $window = $(window);
+    var $articleContent = $('.js-article-content');
+    var $tocRoot = $('.js-toc-root'), $col2 = $('.js-col-aside');
+    var toc;
+    var tocDisabled = false;
+    var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+    var hasToc = $articleContent.find(TOC_SELECTOR).length > 0;
+
+    function disabled() {
+      return $col2.css('display') === 'none' || !hasToc;
+    }
+
+    tocDisabled = disabled();
+
+    toc = $tocRoot.toc({
+      selectors: TOC_SELECTOR,
+      container: $articleContent,
+      scrollTarget: hasSidebar ? '.js-page-main' : null,
+      scroller: hasSidebar ? '.js-page-main' : null,
+      disabled: tocDisabled
+    });
+
+    $window.on('resize', window.throttle(function() {
+      tocDisabled = disabled();
+      toc && toc.setOptions({
+        disabled: tocDisabled
+      });
+    }, 100));
+
+  });
+})();
+(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $window = $(window), $pageFooter = $('.js-page-footer');
+    var $pageAside = $('.js-page-aside');
+    var affix;
+    var tocDisabled = false;
+    var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+
+    affix = $pageAside.affix({
+      offsetBottom: $pageFooter.outerHeight(),
+      scrollTarget: hasSidebar ? '.js-page-main' : null,
+      scroller: hasSidebar ? '.js-page-main' : null,
+      scroll: hasSidebar ? $('.js-page-main').children() : null,
+      disabled: tocDisabled
+    });
+
+    $window.on('resize', window.throttle(function() {
+      affix && affix.setOptions({
+        disabled: tocDisabled
+      });
+    }, 100));
+
+    window.pageAsideAffix = affix;
+  });
+})();
 </script><script>
   window.Lazyload.js(['https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js', 'https://cdn.bootcss.com/Chart.js/2.7.2/Chart.bundle.min.js'], function() {
     var $canvas = null, $this = null, _ctx = null, _text = '';
